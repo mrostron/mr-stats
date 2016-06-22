@@ -1,0 +1,14 @@
+vacuum analyze target.cpu;
+vacuum analyze target.mem;
+vacuum analyze target.net;
+vacuum analyze target.disk;
+vacuum analyze target.buffer;
+vacuum analyze target.page;
+vacuum analyze target.runq;
+vacuum analyze load.cpu;
+vacuum analyze load.mem;
+vacuum analyze load.net;
+vacuum analyze load.disk;
+vacuum analyze load.buffer;
+vacuum analyze load.page;
+vacuum analyze load.runq;

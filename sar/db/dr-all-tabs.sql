@@ -1,0 +1,16 @@
+set search_path=load;
+drop table if exists cpu;
+drop table if exists buffer;
+drop table if exists page;
+drop table if exists disk;
+drop table if exists net;
+drop table if exists mem;
+drop table if exists runq;
+set search_path=target;
+drop table if exists cpu;
+drop table if exists buffer;
+drop table if exists page;
+drop table if exists disk;
+drop table if exists net;
+drop table if exists mem;
+drop table if exists runq;
