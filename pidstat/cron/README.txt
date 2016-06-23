@@ -8,10 +8,11 @@ CRON INSTALLATION
 
 - pull the latest mr-stats zipfile
 
-  (NB: if you pull the master zipfile from github.com, the file comes down as mr-stats-master.zip )
-  (    it will expand to mr-stats-master                                                          )
-  (    for convenience, you should rename it to mr-stats  i.e. remove the -master suffix          )
-  (    the rename operation is included below assuming you pulled the master from github          )
+  - NB:
+  -  if you pull the master zipfile from github.com, the file comes down as mr-stats-master.zip
+     it will expand to mr-stats-master
+     for convenience, you should rename it to mr-stats  i.e. remove the -master suffix
+     the rename operation is included below assuming you pulled the master from github
 
 
 
