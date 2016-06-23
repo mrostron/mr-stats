@@ -41,7 +41,7 @@ $   cp /home/gpadmin/mr-stats/pidstat/cron/pidstat_cron /etc/cron.d
 
 
   - copy mr-stats from master (/home/gpadmin/pidstat) to the segment nodes
-$   for n in {1..N}; do echo sdw${n}; scp -pr /home/gpadmin/mr-stats sdw${n}:; done
+$   for n in {1..N}; do echo sdw${n}; scp -pr /home/gpadmin/mr-stats sdw${n}:/home/gpadmin; done
 
 
   - setup the cron on each node
