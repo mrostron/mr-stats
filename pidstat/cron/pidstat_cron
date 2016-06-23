@@ -1,0 +1,2 @@
+# mr 07 nov 2014 : implemented to collect process-level stats to assist in debugging poor sql
+02 0 * * * gpadmin /home/gpadmin/mr-stats/pidstat/cron/pidstat.sh
