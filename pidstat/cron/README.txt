@@ -1,41 +1,56 @@
+
+
 -----------------
 CRON INSTALLATION
 -----------------
 
-- the pidstat cron implementation is now part of the mr-stats set
-- get the zipfile
-- drop it to a temp space on the master host:
+- the pidstat cron implementation is part of the mr-stats script set
 
-  /var/tmp/mr-stats.zip
+
+- pull the latest mr-stats zipfile
+
+  (NB: if you pull the master zipfile from github.com, the file comes down as mr-stats-master.zip                       )
+  (    it will expand to mr-stats-master                                                                                )
+  (    for convenience, you should rename it to mr-stats  i.e. remove the -master suffix                                )
+  (    you may need to rename the top directory (mr-stats-master) to (mr-stats) if you pulled this directly from github )
+  (    the remainder of these notes assume that you pulled this from github and the rename is required                  )
+
+
 
 - on master (as root):
 
+  - drop the zip file to a temp space on the master host:
+    /var/tmp/mr-stats-master.zip
+
+
+
   - unzip the zip file to the gpadmin home directory, change ownership to gpadmin
-  - setup the cron
-
-$ su - root
-$ unzip -d /home/gpadmin /var/tmp/mr-stats.zip
-$ chown -R gpadmin:gpadmin /home/gpadmin/mr-stats
-
-  - copy the cron definition to /etc/cron.d
-
-$ cp /home/gpadmin/mr-stats/pidstat/cron/pidstat_cron /etc/cron.d
-
-  - copy zipfile to the segment nodes
-
-$  for n in {1..N}; do echo sdw${n}; scp /var/tmp/mr-stats.zip sdw${n}:/var/tmp; done
+$   su - root
+$   unzip -d /home/gpadmin /var/tmp/mr-stats-master.zip
+$   mv /home/gpadmin/mr-stats-master /home/gpadmin/mr-stats
+$   chown -R gpadmin:gpadmin /home/gpadmin/mr-stats
 
 
-- on each segment node (same as for master):
+  - setup the cron ( copy the cron script pidstat_cron to /etc/cron.d )
+$   cp /home/gpadmin/mr-stats/pidstat/cron/pidstat_cron /etc/cron.d
 
-$  ssh sdw${n} 
-$  unzip -d /home/gpadmin /var/tmp/mr-stats.zip
-$  chown -R gpadmin:gpadmin /home/gpadmin/mr-stats
-$  cp /home/gpadmin/mr-stats/pidstat/cron/pidstat_cron /etc/cron.d
-$  ls -l /etc/cron.d/pidstat_cron
 
-- the command to perform the above from the master is (assuming N segment nodes):
 
-$  for n in {1..N}; do echo sdw${n}; ssh sdw${n} "cd /home/gpadmin; unzip -d /home/gpadmin /var/tmp/mr-stats.zip; chown -R /home/gpadmin/mr-stats; cp /home/gpadmin/pidstat/cron/pidstat_cron /etc/cron.d; ls -l /etc/cron.d/pidstat_cron";  done
+- setup on each segment node is the same as for the master (as root):
+
+
+  - copy mr-stats from master (/home/gpadmin/pidstat) to the segment nodes
+$   for n in {1..N}; do echo sdw${n}; scp -pr /home/gpadmin/mr-stats sdw${n}:; done
+
+
+  - setup the cron on each node
+$   ssh sdw${n} 
+$   chown -R gpadmin:gpadmin /home/gpadmin/mr-stats
+$   cp -p /home/gpadmin/mr-stats/pidstat/cron/pidstat_cron /etc/cron.d
+$   ls -l /etc/cron.d/pidstat_cron
+
+
+  - the command to perform the above from the master is (assuming N segment nodes):
+$   for n in {1..N}; do echo sdw${n}; ssh sdw${n} "chown -R gpadmin:gpadmin /home/gpadmin/mr-stats; cp -p /home/gpadmin/pidstat/cron/pidstat_cron /etc/cron.d; ls -l /etc/cron.d/pidstat_cron";  done
 
 
