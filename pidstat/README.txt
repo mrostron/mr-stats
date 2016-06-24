@@ -1,15 +1,10 @@
 --------
 Overview
 --------
-pidstat is part of the sysstat pkg
-it outputs a formatted list of process statistics
-to install the cron scripts, you'll need root access to each target node
-pls follow the README in each directory
+this directory is the cron setup to get a 10-second process-level snapshot 
+it will produce about 1GB/day of log data
+this can be uploaded to a gpdb/postgres database for analysis
+following the README in the cron directory for installation
 
---------
-Contents
---------
-cron:		cron setup scripts and configuration
-analytics:	stats collection/db-load scripts
 
 
