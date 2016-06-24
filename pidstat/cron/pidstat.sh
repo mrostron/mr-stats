@@ -70,8 +70,8 @@ fi
 #-------------
 # start pidstat on 10 second poll for 8640 polls (1 day)
 #-------------
-# pidstat -C postgres -Iudrhl 10 8640 > ${F} &      # uncomment if you only want postgres processes
-pidstat -p ALL -Iudrhl 10 8640 > ${F} &
+pidstat -C postgres -Iudrhl 10 8640 > ${F} &      # uncomment if you only want postgres processes
+# pidstat -p ALL -Iudrhl 10 8640 > ${F} &
 pid=$!
 echo ${pid} > ${P}
 if [ $? -ne 0 ]
