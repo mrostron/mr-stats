@@ -1,8 +1,16 @@
 # mr-stats
-* simple collection and charting of linux system stats data (no cut&paste required)
-* all of the code is shell/sql scripts, no compilation required, no web setup
-* this repo is oriented towards analysis of a GreenplumDB or HAWQ MPP cluster
-* therefore, we include analysis of pg_log and MPP process activity via "pidstat"
-* the README in each directory explains specific installation and analysis procedures
+* this repo provides a simple approach to logging & analysis of a GreenplumDB or HAWQ MPP cluster
+* included:
+  * collection
+    * linux system stats data (sar)
+    * process-centric information (pidstat)
+    * database-session-centric information (pg_log)
+  * analysis
+    * collected information is loaded to a postgresql database
+    * a number of template sql scripts are provided
+* code
+  * all of the code is shell/sql scripts, no compilation required, no web setup
+* instructions
+  * each directory contains a README with specific instructions
 
 
