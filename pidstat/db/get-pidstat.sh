@@ -6,8 +6,8 @@ CONFIG=${1:-${CURRDIR}/config.sh}
 echo "executing with config file ${CONFIG}"
 source ${CONFIG}
 [ -f ${HOSTFILE} ]   || { echo "cant read host file ${HOSTFILE}"; exit 1; }
-mkdir -p ${SA_DEST}  || { echo "cant create directory ${SA_DEST}"; exit 1; }
-chmod 755 ${SA_DEST} || { echo "cant chown directory ${SA_DEST}"; exit 1; }
+mkdir -p ${PIDSTAT_DEST}  || { echo "cant create directory ${PIDSTAT_DEST}"; exit 1; }
+chmod 755 ${PIDSTAT_DEST} || { echo "cant chown directory ${PIDSTAT_DEST}"; exit 1; }
 
 
 # ----------------------
@@ -26,7 +26,7 @@ chmod 755 ${SA_DEST} || { echo "cant chown directory ${SA_DEST}"; exit 1; }
 
 function get_list_of_files {
   typeset l_host=${1:?"list_of_files missing param 1 l_host"}
-  ssh ${l_host} "find ${SA_SOURCE} -name sa[0-9][0-9]* -mtime -${DAYS_HIST} | xargs ls -Ggl --time-style='+%Y%m%d' " |
+  ssh ${l_host} "find ${PIDSTAT_SOURCE} -name pidstat.[0-6] -mtime -${DAYS_HIST} | xargs ls -Ggl --time-style='+%Y%m%d' " |
   cut -d" " -f4,5
 }
 
@@ -47,7 +47,7 @@ function get_list_of_files {
 for l_host in $( cat ${HOSTFILE} )
 do
 # setup local host-specific destination directory
-  l_dest=${SA_DEST}/${l_host}
+  l_dest=${PIDSTAT_DEST}/${l_host}
   mkdir -p ${l_dest} || { echo "cant create directory ${l_dest}; exit 1; }
   chmod -R 755 ${l_dest} || { echo "cant chmod directory ${l_dest}; exit 1; }
 # copy from remote host to the local host-specific destination directory
