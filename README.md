@@ -2,23 +2,20 @@
 * this repo provides a (hopefully) simple approach to logging & analysis of system load on a GreenplumDB or HAWQ MPP cluster
   * it is a current work in progress and I will update as more components complete
 # Content
+  * README
+    * each directory contains a README with specific instructions
   * sar
-    * collection script (get-sa.sh)
-    * load script (load.sh)
-    * charting scripts (a number of R scripts)
+    * db: data collection and db load scripts (shell/sql)
+    * charts: charting scripts (R)
   * pidstat
-    * cron setup
-    * collected information is loaded to a postgresql database
-    * a number of template sql scripts are provided
+    * cron: local setup
+    * db: data collection and db load scripts (shell/sql)
+    * charts: charting scripts (R)
   * pg_log
-    * pg_log database load scripts
-    * pg_log error analysis
-    * basic pg_log charts
-  * combo-sar-pg_log-pidstat
-    * SQL to join the pidstat and pg_log output to determine SQL
-    * kmeans work across sar,pidstat,pg_log
-* README
-  * each directory contains a README with specific instructions
+    * db: database load scripts (shell/sql)
+    * charts: charting scripts (R)
+  * combo-analysis
+    * combined charts and analyses across sar/pidstat/pg_log data
 
 # How to Use this TK
   * identify hot servers
