@@ -10,10 +10,13 @@
     * cron setup
     * collected information is loaded to a postgresql database
     * a number of template sql scripts are provided
-  * analysis
-    * pidstat and pg_log database load scripts
+  * pg_log
+    * pg_log database load scripts
+    * pg_log error analysis
+    * basic pg_log charts
+  * combo-sar-pg_log-pidstat
     * SQL to join the pidstat and pg_log output to determine SQL
-    * error detection
+    * kmeans work across sar,pidstat,pg_log
 * README
   * each directory contains a README with specific instructions
 
