@@ -1,7 +1,9 @@
 #!/bin/bash
-
-CONFIG=${1:-config.sh}
+# -----------------
+CURRDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+CONFIG=${1:-${CURRDIR}/config.sh}
 [ -f ${CONFIG} ]   || { echo "cant read config file ${CONFIG}"; exit 1; }
+echo "executing with config file ${CONFIG}"
 source ${CONFIG}
 
 # -----------------
