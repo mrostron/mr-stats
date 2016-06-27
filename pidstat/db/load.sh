@@ -2,7 +2,7 @@
 # -----------------
 CURRDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CONFIG=${1:-${CURRDIR}/config.sh}
-[ -f ${CONFIG} ]   || { echo "cant read config file ${CONFIG}"; exit 1; }
+[ -f ${CONFIG} ] || { echo "cant read config file ${CONFIG}"; exit 1; }
 echo "executing with config file ${CONFIG}"
 source ${CONFIG}
 
@@ -25,13 +25,13 @@ function get_list_of_files {
 # -----------------
 function preprocess {
   echo "executing script ${TRUNCATE_SQL}"
-  psql ${PSQL_OPTS} -v tab=cpu    -f ${TRUNCATE_SQL}
-  psql ${PSQL_OPTS} -v tab=mem    -f ${TRUNCATE_SQL}
-  psql ${PSQL_OPTS} -v tab=page   -f ${TRUNCATE_SQL}
-  psql ${PSQL_OPTS} -v tab=buffer -f ${TRUNCATE_SQL}
-  psql ${PSQL_OPTS} -v tab=net    -f ${TRUNCATE_SQL}
-  psql ${PSQL_OPTS} -v tab=disk   -f ${TRUNCATE_SQL}
-  psql ${PSQL_OPTS} -v tab=runq   -f ${TRUNCATE_SQL}
+  psql ${PSQL_OPTS} -v tab=pidstat -f ${TRUNCATE_SQL}
+#   psql ${PSQL_OPTS} -v tab=mem    -f ${TRUNCATE_SQL}
+#   psql ${PSQL_OPTS} -v tab=page   -f ${TRUNCATE_SQL}
+#   psql ${PSQL_OPTS} -v tab=buffer -f ${TRUNCATE_SQL}
+#   psql ${PSQL_OPTS} -v tab=net    -f ${TRUNCATE_SQL}
+#   psql ${PSQL_OPTS} -v tab=disk   -f ${TRUNCATE_SQL}
+#   psql ${PSQL_OPTS} -v tab=runq   -f ${TRUNCATE_SQL}
 }
 
 
@@ -42,13 +42,13 @@ function preprocess {
 # -----------------
 function postprocess {
   echo "executing script ${INSERT_SQL}"
-  psql ${PSQL_OPTS} -v tab=cpu    -f ${INSERT_SQL}
-  psql ${PSQL_OPTS} -v tab=mem    -f ${INSERT_SQL}
-  psql ${PSQL_OPTS} -v tab=page   -f ${INSERT_SQL}
-  psql ${PSQL_OPTS} -v tab=buffer -f ${INSERT_SQL}
-  psql ${PSQL_OPTS} -v tab=net    -f ${INSERT_SQL}
-  psql ${PSQL_OPTS} -v tab=disk   -f ${INSERT_SQL}
-  psql ${PSQL_OPTS} -v tab=runq   -f ${INSERT_SQL}
+  psql ${PSQL_OPTS} -v tab=pidstat -f ${INSERT_SQL}
+#   psql ${PSQL_OPTS} -v tab=mem    -f ${INSERT_SQL}
+#   psql ${PSQL_OPTS} -v tab=page   -f ${INSERT_SQL}
+#   psql ${PSQL_OPTS} -v tab=buffer -f ${INSERT_SQL}
+#   psql ${PSQL_OPTS} -v tab=net    -f ${INSERT_SQL}
+#   psql ${PSQL_OPTS} -v tab=disk   -f ${INSERT_SQL}
+#   psql ${PSQL_OPTS} -v tab=runq   -f ${INSERT_SQL}
 }
 
 
