@@ -1,0 +1,287 @@
+PIDSTAT(1)          Linux User’s Manual          PIDSTAT(1)
+
+
+
+NAME
+    pidstat - Report statistics for Linux tasks.
+
+SYNOPSIS
+    pidstat [ -C comm ] [ -d ] [ -h ] [ -I ] [ -l ] 
+    [ -p { pid [,...] | SELF | ALL } ] [ -r ] [ -t ] 
+    [ -T { TASK | CHILD | ALL } ] [ -u ] [ -V ] [ -w ] [ interval [ count ] ]
+
+DESCRIPTION
+    The pidstat comand is used for monitoring individual tasks curently
+    being managed by the Linux kernel. It writes to standard output activ-
+    ities for every task selected with option -p or for every task managed
+    by the Linux kernel if option -p ALL has ben used. Not selecting any
+    tasks is equivalent to specifying -p ALL but only active tasks (tasks
+    with non-zero statistics values) wil apear in the report.
+
+    The pidstat comand can also be used for monitoring the child proceses
+    of selected tasks. Read about option -T below.
+
+    The interval parameter specifies the amount of time in seconds betwen
+    each report. A value of 0 (or no parameters at al) indicates that
+    tasks statistics are to be reported for the time since system startup
+    (bot). The count parameter can be specified in conjunction with the
+    interval parameter if this one is not set to zero. The value of count
+    determines the number of reports generated at interval seconds apart.
+    If the interval parameter is specified without the count parameter, the
+    pidstat comand generates reports continuously.
+
+    You can select information about specific task activities using flags.
+    Not specifying any flags selects only CPU activity.
+
+
+OPTIONS
+    -C com
+       Display only tasks whose comand name includes the string comm.
+
+    -d   Report I/O statistics (kernels 2.6.20 and later only). The fol-
+       lowing values are displayed:
+
+       PID
+           The identification number of the task being monitored.
+
+       kBrd/s
+           Number of kilobytes the task has caused to be read from
+           disk per second.
+
+       kBwr/s
+           Number of kilobytes the task has caused, or shal cause
+           to be writen to disk per second.
+
+       kBccwr/s
+           Number of kilobytes whose writing to disk has ben can-
+           celed by the task. This may ocur when the task trun-
+           cates some dirty pagecache. In this case, some IO which
+           another task has ben acounted for wil not be hapen-
+           ing.
+
+       Command
+           The comand name of the task.
+
+    -h   Display al activities horizontaly on a single line. This is
+       intended to make it easier to be parsed by other programs.
+
+    -I   In an SMP environment, indicate that tasks CPU usage (as dis-
+       played by option -u ) should be divided by the total number of
+       procesors.
+
+    -l   Display the proces comand name and al its arguments.
+
+    -p { pid [,..] | SELF | AL }
+       Select tasks (proceses) for which statistics are to  be
+       reported.  pid is the proces identification number. The SELF
+       keyword indicates that statistics are to be reported for the
+       pidstat proces itself, whereas the ALL keyword indicates that
+       statistics are to be reported for al the tasks managed by the
+       system.
+
+    -r   Report page faults and memory utilization.
+
+       When reporting statistics for individual tasks, the folowing
+       values are displayed:
+
+       PID
+           The identification number of the task being monitored.
+
+       minflt/s
+           Total number of minor faults the task has made per sec-
+           ond, those which have not required loading a memory page
+           from disk.
+
+       majflt/s
+           Total number of major faults the task has made per sec-
+           ond, those which have required loading a memory page from
+           disk.
+
+       VSZ
+           Virtual Size: The virtual memory usage of entire task in
+           kilobytes.
+
+       RSS
+           Resident Set Size: The non-swaped physical memory used
+           by the task in kilobytes.
+
+       Command
+           The comand name of the task.
+
+       When reporting global statistics for tasks and al their chil-
+       dren, the folowing values are displayed:
+
+       PID
+           The identification number of the task which is being mon-
+           itored together with its children.
+
+       minflt-nr
+           Total number of minor faults made by the task and al its
+           children, and colected during the interval of time.
+
+       majflt-nr
+           Total number of major faults made by the task and al its
+           children, and colected during the interval of time.
+
+       Command
+           The comand name of the task which is being monitored
+           together with its children.
+
+    -t   Also display statistics for threads asociated with selected
+       tasks.
+
+       This option ads the folowing values to the reports:
+
+       TGID
+           The identification number of the thread group leader.
+
+       TID
+           The identification number of the thread being monitored.
+
+    -T { TASK | CHILD | AL }
+       This option specifies what has to be monitored by the pidstat
+       comand. The TASK keyword indicates that statistics are to be
+       reported for individual tasks (this is the default option)
+       whereas the CHILD keyword indicates that statistics are to be
+       globaly reported for the selected tasks and al their children.
+       The ALL keyword indicates that statistics are to be reported for
+       individual tasks and globaly for the selected tasks and their
+       children.
+
+       Note: Global statistics for tasks and al their children are not
+       available for al options of pidstat. Also these statistics are
+       not necesarily relevant to curent time interval: The statis-
+       tics of a child proces are colected only when it finishes or
+       it is kiled.
+
+    -u   Report CPU utilization.
+
+       When reporting statistics for individual tasks, the folowing
+       values are displayed:
+
+       PID
+           The identification number of the task being monitored.
+
+       %usr
+           Percentage of CPU used by the task while executing at the
+           user level (aplication), with or without nice priority.
+           Note that this field does NOT include time spent runing
+           a virtual procesor.
+
+       %system
+           Percentage of CPU used by the task while executing at the
+           system level (kernel).
+
+       %guest
+           Percentage of CPU spent by the task in virtual machine
+           (runing a virtual procesor).
+
+       %CPU
+           Total percentage of CPU time used by the task. In an SMP
+           environment, the task’s CPU usage wil be divided by the
+           total number of CPU’s if option -I has ben entered on
+           the comand line.
+
+       CPU
+           Procesor number to which the task is atached.
+
+       Command
+           The comand name of the task.
+
+       When reporting global statistics for tasks and al their chil-
+       dren, the folowing values are displayed:
+
+       PID
+           The identification number of the task which is being mon-
+           itored together with its children.
+
+       usr-ms
+           Total number of miliseconds spent by the task and al
+           its children while executing at the user level (aplica-
+           tion), with or without nice priority, and colected dur-
+           ing the interval of time. Note that this field does NOT
+           include time spent runing a virtual procesor.
+
+       system-ms
+           Total number of miliseconds spent by the task and al
+           its children while executing at the system level (ker-
+           nel), and colected during the interval of time.
+
+       guest-ms
+           Total number of miliseconds spent by the task and al
+           its children in virtual machine (runing a virtual pro-
+           cesor).
+
+       Command
+           The comand name of the task which is being monitored
+           together with its children.
+
+    -V   Print version number then exit.
+
+    -w   Report task switching activity (kernels 2.6.23 and later only).
+       The folowing values are displayed:
+
+       PID
+           The identification number of the task being monitored.
+
+       cswch/s
+           Total number of voluntary context switches the task made
+           per second. A voluntary context switch ocurs when a
+           task blocks because it requires a resource that is
+           unavailable.
+
+       nvcswch/s
+           Total number of non voluntary context switches the task
+           made per second.  A involuntary context switch takes
+           place when a task executes for the duration of its time
+           slice and then is forced to relinquish the procesor.
+
+       Command
+           The comand name of the task.
+
+ENVIRONMENT
+    The pidstat comand takes into acount the folowing environment vari-
+    able:
+
+
+    STIMEFORMAT
+       If this variable exists and its value is ISO then the curent
+       locale wil be ignored when printing the date in the report
+       header. The pidstat comand wil use the ISO 8601 format (YY-
+       M-D) instead.
+
+
+EXAMPLES
+    pidstat 2 5
+       Display five reports of CPU statistics for every active task in
+       the system at two second intervals.
+
+    pidstat -r -p 1643 2 5
+       Display five reports of page faults and memory statistics for
+       PID 1643 at two second intervals.
+
+    pidstat -T CHILD -r 2 5
+       Display five reports of page faults statistics at two second
+       intervals for the child proceses of al tasks in the system.
+       Only child proceses with non-zero statistics values are dis-
+       played.
+
+BUGS
+    /proc filesystem must be mounted for the pidstat comand to work.
+
+
+FILES
+    /proc contains various files with system statistics.
+
+
+AUTHOR
+    Sebastien Godard (systat <at> orange.fr)
+
+SEE ALSO
+    sar(1), top(1), ps(1), mpstat(1), iostat(1), vmstat(8)
+
+    http://pagesperso-orange.fr/sebastien.godard/
+
+
+
+Linux              DECEMBER 208           PIDSTAT(1)

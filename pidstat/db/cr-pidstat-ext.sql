@@ -1,4 +1,5 @@
 
+
 DROP EXTERNAL TABLE wm_ad_hoc.pidstat_mr_01;
 
 CREATE EXTERNAL WEB TABLE wm_ad_hoc.pidstat_mr_01 (

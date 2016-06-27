@@ -1,7 +1,9 @@
+
 # Introduction
 * this repo provides a (hopefully) simple approach to logging & analysis of system load on a GreenplumDB or HAWQ MPP cluster
   * it is a current work in progress and I will update as more components complete
-# Content
+
+# Contents
   * README
     * each directory contains a README with specific instructions
   * sar

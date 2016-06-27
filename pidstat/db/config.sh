@@ -8,21 +8,21 @@ export PGHOST=mdw
 
 TEMPDIR=/var/tmp
 CLUSTER=local
-SA_BASE=/data/sa                        # base local storage directory
-SA_DEST=${SA_BASE}/${CLUSTER}           # cluster-specific local storage directory
-SA_SOURCE=/var/log/sa                   # remote sa directory                           (customize)
-HOSTFILE=${DIR}/hostfile                # list of hosts in cluster                      (as in: for n in $(cat $HOSTFILE))
-DAYS_HIST=3                             # number of days historical sa files to collect (as in: find -mtime $DAYS_HIST)
+PIDSTAT_BASE=/data/mr-stats/pidstat               # pidstat storage directory (on admin node)
+PIDSTAT_DEST=${PIDSTAT_BASE}/${CLUSTER}           # cluster-specific local storage directory (on admin node)
+PIDSTAT_SOURCE=/home/gpadmin/mr-stats/pidstat/log # pidstat storage directory (on local nodes)
+HOSTFILE=${DIR}/hostfile                          # list of hosts in cluster                      (as in: for n in $(cat $HOSTFILE))
+DAYS_HIST=3                                       # number of days historical sa files to collect (as in: find -mtime $DAYS_HIST)
 
 # ---------
 # sql
 # ---------
-PSQL_OPTS="-eAtq"                       # psql additional options
+PSQL_OPTS="-eAtq"                                 # psql additional options
 #-- initial (full) processing
-#INSERT_SQL=full-ins.sql                # copy data from load.table to target.table
-#TRUNCATE_SQL=truncate-tgt-and-load.sql # truncate load and/or target tables
+#INSERT_SQL=full-ins.sql                          # copy data from load.table to target.table
+#TRUNCATE_SQL=truncate-tgt-and-load.sql           # truncate load and/or target tables
 #-- incremental processing
-INSERT_SQL=incr-ins.sql                 # copy data from load.table to target.table
-TRUNCATE_SQL=truncate-load.sql          # truncate load tables only
+INSERT_SQL=incr-ins.sql                           # copy data from load.table to target.table
+TRUNCATE_SQL=truncate-load.sql                    # truncate load tables only
 
 
