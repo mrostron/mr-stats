@@ -26,8 +26,7 @@ chmod 755 ${PIDSTAT_DEST} || { echo "cant chown directory ${PIDSTAT_DEST}"; exit
 
 function get_list_of_files {
   typeset l_host=${1:?"list_of_files missing param 1 l_host"}
-  ssh ${l_host} "find ${PIDSTAT_SOURCE} -name pidstat.[0-6] -mtime -${DAYS_HIST} | xargs ls -Ggl --time-style='+%Y%m%d' " |
-  cut -d" " -f4,5
+  ssh ${l_host} "find ${PIDSTAT_SOURCE} -name pidstat.[0-6] -mtime -${DAYS_HIST} | xargs ls -Ggl --time-style='+%Y%m%d' | awk '{print $4,$5}'"
 }
 
 
@@ -48,8 +47,8 @@ for l_host in $( cat ${HOSTFILE} )
 do
 # setup local host-specific destination directory
   l_dest=${PIDSTAT_DEST}/${l_host}
-  mkdir -p ${l_dest} || { echo "cant create directory ${l_dest}; exit 1; }
-  chmod -R 755 ${l_dest} || { echo "cant chmod directory ${l_dest}; exit 1; }
+  mkdir -p ${l_dest} || { echo "cant create destination directory ${l_dest}; exit 1; }
+  chmod -R 755 ${l_dest} || { echo "cant chmod destination directory ${l_dest}; exit 1; }
 # copy from remote host to the local host-specific destination directory
   get_list_of_files ${l_host} |
   while read TIMESTAMP FULLPATH
@@ -58,7 +57,8 @@ do
     echo "scp -p ${l_host}:${FULLPATH} ${f}"
     scp -p ${l_host}:${FULLPATH} ${f}
     chmod 644 ${f}
-    bzip2 -f ${f}
+    echo "bzip2 compressing ${f}"
+    bzip2 -1 -f ${f}
   done
 done
 
