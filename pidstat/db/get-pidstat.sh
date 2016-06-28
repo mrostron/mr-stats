@@ -8,6 +8,7 @@ source ${CONFIG}
 [ -f ${HOSTFILE} ]   || { echo "cant read host file ${HOSTFILE}"; exit 1; }
 mkdir -p ${PIDSTAT_DEST}  || { echo "cant create directory ${PIDSTAT_DEST}"; exit 1; }
 chmod 755 ${PIDSTAT_DEST} || { echo "cant chown directory ${PIDSTAT_DEST}"; exit 1; }
+trap "echo trapped; kill -9 0" 1 2 3 15
 
 
 # ----------------------
