@@ -85,6 +85,6 @@ function load {
 
 trap "echo trapped; kill -9 0" 1 2 3 15
 preprocess
-get_list_of_files | while read F; do load ${F} ; done
+get_list_of_files # | while read F; do load ${F} ; done
 postprocess
 

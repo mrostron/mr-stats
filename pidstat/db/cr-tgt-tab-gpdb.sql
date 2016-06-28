@@ -9,9 +9,9 @@
 -- dont edit from here down
 set search_path=:target_schema;
 
-DROP TABLE if exists pidstat_mr_01;
+DROP TABLE if exists pidstat;
 
-CREATE TABLE pidstat_mr_01 (
+CREATE TABLE pidstat (
     ts    timestamp,
     epoch integer,
     procpid integer,
@@ -34,6 +34,6 @@ DISTRIBUTED RANDOMLY
 PARTITION BY RANGE (ts) (START (:partition_start_date) END (:partition_end_date) EVERY (INTERVAL :partition_interval))
 ;
 
-CREATE INDEX pidstat_idx_01 ON pidstat_mr_01 (ts)
+CREATE INDEX pidstat_idx_01 ON pidstat (ts)
 ;
 

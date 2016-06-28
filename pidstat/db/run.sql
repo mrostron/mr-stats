@@ -1,7 +1,12 @@
---
-\i cr-pg_log-ext.sql
-\i cr-pidstat-ext.sql
---
-create temp table pg_log as select * from wm_ad_hoc.pg_log_mr_01;
-create temp table pidstat as select * from wm_ad_hoc.pidstat_mr_01;
---
+
+
+------------------------
+-- edit here
+------------------------
+
+\set load_schema load
+\set target_schema target
+
+
+create temp table pg_log as select * from :load_schema.pidstat_ext;
+

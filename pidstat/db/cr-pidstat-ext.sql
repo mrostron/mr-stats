@@ -1,8 +1,13 @@
 
+------------------------
+-- edit here
+------------------------
 
-DROP EXTERNAL TABLE wm_ad_hoc.pidstat_mr_01;
+\set load_schema load
+\set target_schema target
 
-CREATE EXTERNAL WEB TABLE wm_ad_hoc.pidstat_mr_01 (
+DROP EXTERNAL TABLE :load_schema.pidstat;
+CREATE EXTERNAL WEB TABLE :load_schema.pidstat (
     epoch integer,
     procpid integer,
     cpu_usr numeric,

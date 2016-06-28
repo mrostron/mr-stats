@@ -1,6 +1,6 @@
 
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+CURRDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 export PGDATABASE=sar
 export PGUSER=mrostron
@@ -19,10 +19,9 @@ DAYS_HIST=3                                       # number of days historical sa
 # ---------
 PSQL_OPTS="-eAtq"                                 # psql additional options
 #-- initial (full) processing
-#INSERT_SQL=full-ins.sql                          # copy data from load.table to target.table
-#TRUNCATE_SQL=truncate-tgt-and-load.sql           # truncate load and/or target tables
+#INSERT_SQL=${CURRDIR}/full-ins.sql                          # copy data from load.table to target.table
+#TRUNCATE_SQL=${CURRDIR}/truncate-tgt-and-load.sql           # truncate load and/or target tables
 #-- incremental processing
-INSERT_SQL=incr-ins.sql                           # copy data from load.table to target.table
-TRUNCATE_SQL=truncate-load.sql                    # truncate load tables only
-
+INSERT_SQL=${CURRDIR}/incr-ins.sql                           # copy data from load.table to target.table
+TRUNCATE_SQL=${CURRDIR}/truncate-load.sql                    # truncate load tables only
 

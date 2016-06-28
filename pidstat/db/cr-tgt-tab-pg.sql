@@ -10,9 +10,9 @@
 -- dont edit from here down
 set search_path=:target_schema;
 
-DROP TABLE if exists pidstat_mr_01;
+DROP TABLE if exists pidstat;
 
-CREATE TABLE pidstat_mr_01 (
+CREATE TABLE pidstat (
     ts    timestamp,
     epoch integer,
     procpid integer,
@@ -33,5 +33,5 @@ CREATE TABLE pidstat_mr_01 (
 )
 ;
 
-CREATE INDEX pidstat_idx_01 ON pidstat_mr_01 (ts)
+CREATE INDEX pidstat_idx_01 ON pidstat (ts)
 ;
