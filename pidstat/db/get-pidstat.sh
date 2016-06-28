@@ -26,7 +26,7 @@ chmod 755 ${PIDSTAT_DEST} || { echo "cant chown directory ${PIDSTAT_DEST}"; exit
 
 function get_list_of_files {
   typeset l_host=${1:?"list_of_files missing param 1 l_host"}
-  ssh ${l_host} "find ${PIDSTAT_SOURCE} -name pidstat.[0-6] -mtime -${DAYS_HIST} | xargs ls -Ggl --time-style='+%Y%m%d' | awk '{print $4,$5}'"
+  ssh ${l_host} "find ${PIDSTAT_SOURCE} -name pidstat.[0-6] -mtime -${DAYS_HIST} | xargs ls -Ggl --time-style='+%Y%m%d' | awk '{print \$4,\$5}'"
 }
 
 
