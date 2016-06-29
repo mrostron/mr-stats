@@ -14,6 +14,7 @@
 # Procedure
 # - set up parameters
 # - check output directory and output file are both writable
+# - remove files older than retention ($R)
 # - touch output file
 # - start pidstat (snaps all postgres pids every 10secs for 24hrs)
 # - record status via "logger"
@@ -29,12 +30,13 @@
 #-------------
 # set up parameters, customize here
 #-------------
-D=/home/gpadmin/mr-stats/pidstat/log
-DOW=$(date +%w)
+D=/data/mr-stats/pidstat/log
+TODAY`=$(date +%Y%m%d)
 T=$(date)
-F=${D}/pidstat.${DOW}
+F=${D}/pidstat.${TODAY}
 L=${D}/pidstat.log
 P=${D}/pidstat.pid
+R=3
 
 #-------------
 # check output directory exists (D)
@@ -47,6 +49,12 @@ then
   logger "${M}"
   exit 1
 fi
+
+#-------------
+# remove old files
+#-------------
+
+find ${D} -mtime +${R} | xargs rm -f
 
 #-------------
 # redirect output to logfile (L)

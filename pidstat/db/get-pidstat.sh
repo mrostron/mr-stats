@@ -1,5 +1,9 @@
 #!/bin/bash
 # ----------------------
+# intro:
+# - source the config file
+# - setup destination directory for PIDSTAT FILES
+# ----------------------
 CURRDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CONFIG=${1:-${CURRDIR}/config.sh}
 [ -f ${CONFIG} ]   || { echo "cant read config file ${CONFIG}"; exit 1; }
@@ -27,7 +31,7 @@ trap "echo trapped; kill -9 0" 1 2 3 15
 
 function get_list_of_files {
   typeset l_host=${1:?"list_of_files missing param 1 l_host"}
-  ssh ${l_host} "find ${PIDSTAT_SOURCE} -name pidstat.[0-6] -mtime -${DAYS_HIST} | xargs ls -Ggl --time-style='+%Y%m%d' | awk '{print \$4,\$5}'"
+  ssh ${l_host} "find ${PIDSTAT_SOURCE} -name pidstat.[0-9] -mtime -${DAYS_HIST} | xargs ls -Ggl --time-style='+%Y%m%d' | awk '{print \$4,\$5}'"
 }
 
 

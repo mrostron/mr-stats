@@ -1,5 +1,8 @@
 #!/bin/bash
 # -----------------
+# introduction
+# - source config file
+# -----------------
 CURRDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CONFIG=${1:-${CURRDIR}/config.sh}
 [ -f ${CONFIG} ] || { echo "cant read config file ${CONFIG}"; exit 1; }
@@ -84,7 +87,7 @@ function load {
 # -----------------
 
 trap "echo trapped; kill -9 0" 1 2 3 15
-# preprocess
-get_list_of_files | while read F; do load ${F} ; break ; done
+preprocess
+get_list_of_files | while read F; do load ${F} ; done
 # postprocess
 

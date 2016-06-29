@@ -3,9 +3,9 @@
 /^Linux/ {next}
 /^$/     {next}
 /^#/     {next}
-# prepend fields: cluster, host, and a placeholder for timestamp
+# prepend fields: ( cluster, host, null placeholder for timestamp )
 {
-  printf c "~" h "~" "~"
+  printf c "~" h "~\\N~"
   for (i=1;i<16;i++) printf $i "~"
   for (i=16;i<=NF;i++) printf $i " "
   print ""
