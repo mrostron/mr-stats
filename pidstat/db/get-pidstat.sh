@@ -54,7 +54,7 @@ do
   get_list_of_files ${l_host} |
   while read TIMESTAMP FULLPATH
   do
-    typeset f=${l_dest}/sa${TIMESTAMP}
+    typeset f=${l_dest}/pidstat${TIMESTAMP}
     echo "scp -p ${l_host}:${FULLPATH} ${f}"
     scp -p ${l_host}:${FULLPATH} ${f}
     chmod 644 ${f}

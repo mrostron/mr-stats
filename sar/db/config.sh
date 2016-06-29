@@ -1,6 +1,6 @@
 
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+CURRDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 export PGDATABASE=sar
 export PGUSER=mrostron
@@ -11,7 +11,7 @@ CLUSTER=local
 SA_BASE=/data/sa                        # base local storage directory
 SA_DEST=${SA_BASE}/${CLUSTER}           # cluster-specific local storage directory
 SA_SOURCE=/var/log/sa                   # remote sa directory                           (customize)
-HOSTFILE=${DIR}/hostfile                # list of hosts in cluster                      (as in: for n in $(cat $HOSTFILE))
+HOSTFILE=${CURRDIR}/hostfile                # list of hosts in cluster                      (as in: for n in $(cat $HOSTFILE))
 DAYS_HIST=3                             # number of days historical sa files to collect (as in: find -mtime $DAYS_HIST)
 
 # ---------

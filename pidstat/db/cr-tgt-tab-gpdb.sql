@@ -12,6 +12,8 @@ set search_path=:target_schema;
 DROP TABLE if exists pidstat;
 
 CREATE TABLE pidstat (
+    cluster text,
+    host  text,
     ts    timestamp,
     epoch integer,
     procpid integer,
