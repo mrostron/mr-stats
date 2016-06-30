@@ -11,7 +11,7 @@ CLUSTER=local
 PIDSTAT_BASE=/data/mr-stats/pidstat               # pidstat storage directory (on admin node)
 PIDSTAT_DEST=${PIDSTAT_BASE}/${CLUSTER}           # cluster-specific local storage directory (on admin node)
 PIDSTAT_SOURCE=${PIDSTAT_BASE}/log                # pidstat storage directory (on local nodes)
-PIDSTAT_AWK=/home/gpadmin/mr-stats/pidstat/db/pidstat.awk # pidstat awk filter
+PIDSTAT_AWK=${CURRDIR}/pidstat.awk # pidstat awk filter
 HOSTFILE=${CURRDIR}/hostfile                      # list of hosts in cluster                      (as in: for n in $(cat $HOSTFILE))
 DAYS_HIST=3                                       # number of days historical sa files to collect (as in: find -mtime $DAYS_HIST)
 

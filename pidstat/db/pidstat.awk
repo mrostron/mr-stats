@@ -3,6 +3,7 @@
 /^Linux/ {next}
 /^$/     {next}
 /^#/     {next}
+NF < 16  {next}
 # prepend fields: ( cluster, host, null placeholder for timestamp )
 {
   printf c "~" h "~\\N~"

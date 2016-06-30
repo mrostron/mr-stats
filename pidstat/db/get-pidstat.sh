@@ -2,17 +2,21 @@
 # ----------------------
 # intro:
 # - source the config file
-# - setup destination directory for PIDSTAT FILES
+# - check source directory for PIDSTAT files
+# - setup destination directory for PIDSTAT files
 # ----------------------
 CURRDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CONFIG=${1:-${CURRDIR}/config.sh}
-[ -f ${CONFIG} ]   || { echo "cant read config file ${CONFIG}"; exit 1; }
+[ -f ${CONFIG} ]          || { echo "cant read config file ${CONFIG}"; exit 1; }
 echo "executing with config file ${CONFIG}"
 source ${CONFIG}
-[ -f ${HOSTFILE} ]   || { echo "cant read host file ${HOSTFILE}"; exit 1; }
+[ -f ${HOSTFILE} ]        || { echo "cant read host file ${HOSTFILE}"; exit 1; }
+[ -d ${PIDSTAT_SOURCE} ]  || { echo "cant read directory pidstat-source ${PIDSTAT_SOURCE}"; exit 1; }
 mkdir -p ${PIDSTAT_DEST}  || { echo "cant create directory ${PIDSTAT_DEST}"; exit 1; }
 chmod 755 ${PIDSTAT_DEST} || { echo "cant chown directory ${PIDSTAT_DEST}"; exit 1; }
 trap "echo trapped; kill -9 0" 1 2 3 15
+
+
 
 
 # ----------------------
@@ -28,7 +32,6 @@ trap "echo trapped; kill -9 0" 1 2 3 15
 #   column 4: last-mod-time day: yyyymmdd
 #   column 5: full path to file
 # ----------------------
-
 function get_list_of_files {
   typeset l_host=${1:?"list_of_files missing param 1 l_host"}
   ssh ${l_host} "find ${PIDSTAT_SOURCE} -name pidstat.[0-9]* -mtime -${DAYS_HIST} | xargs ls -Ggl --time-style='+%Y%m%d' | awk '{print \$4,\$5}'"
@@ -47,7 +50,6 @@ function get_list_of_files {
 # to do
 #   - implement a retention period
 # ----------------------
-
 for l_host in $( cat ${HOSTFILE} )
 do
 # setup local host-specific destination directory

@@ -5,7 +5,7 @@
 select 'table-count-before:'||:t||':'||count(*)||':'||max(ts) from target.:tab
 ;
 
-update load.:tab set ts = date_trunc('min',ts)
+update load.:tab set ts = date_trunc('min',to_timestamp(epoch)) + interval '1 min' ;
 ;
 
 insert into target.:tab 
