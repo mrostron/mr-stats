@@ -2,7 +2,8 @@
 OVERVIEW
 --------
 pidstat is similar to ps, but can be set up to snap every N seconds, and includes per-process utilization over the time interval
-this directory contains a set of cron-execution and database load scripts
+this directory contains a set of cron-execution and database load scripts for pidstat
+the information gathered here can be cross-referenced with both sar and pg_log information to drill-down to specified sessions or slices thereof
 
 ---------
 PROCEDURE
@@ -31,9 +32,6 @@ PROCEDURE
   - db/get-pidstat.sh will collect the files from each host back to the master
 
 - load the database
-  - db/load.sh
-
-
-
+  - db/load.sh will read the collected pidstat on the master and load it to the database
 
 
