@@ -11,9 +11,10 @@ CRON INSTALLATION OVERVIEW
        for convenience, you should rename it to mr-stats  i.e. remove the -master suffix
        the rename operation is included below assuming you pulled the master from github
 
-- the pidstat cron installation has two steps:
+- the pidstat cron installation has the following main steps:
   - unzip the distribution into the gpadmin home dir (creates a directory named mr-stats/pidstat/cron)
-  - copy the cron command into /etc/cron.d on all nodes in the cluster
+  - create a directory on each node to hold local pidstat results, owner gpadmin (dflt: /data/mr-stats/pidstat/log)
+  - copy the cron command file pidstat_cron into /etc/cron.d on all nodes in the cluster
 
 - INSTALLATION: see SETUP notes below: one set for master node, another for segment nodes
 
@@ -26,10 +27,11 @@ OUTPUT
 
 - pidstat will run via cron on each host
 - it will use /data/mr-stats/pidstat as it's home
-- log files are in /data/mr-stats/pidstat/log
-  - output of process activity by day-of-week (7-day rotation)
+- local pidstat output files are in /data/mr-stats/pidstat/log
+  - output of process activity (pidstat.yyyymmdd)
   - pid file of latest process
   - log file containing output from execution each day
+- local files are copied to the master get-pidstat.sh, then loaded to a database (ref db directory)
 
 
 -----------------
@@ -37,12 +39,12 @@ CRON INSTALLATION ON MASTER (as root):
 -----------------
 
   - as root:
-    - drop the zip file to a temp space on the master host:
+    - copy the zip file to a temp space on the master host:
       ( /var/tmp/mr-stats-master.zip )
 
   - as root:
     - unzip the zip file to the gpadmin home directory, change ownership to gpadmin, and
-    - create a directory for pidstat output, change owner to gpadmin
+    - create a directory for pidstat local output, change owner to gpadmin
 $   mkdir -p /data/mr-stats/pidstat/log
 $   chown -R gpadmin:gpadmin /data/mr-stats/pidstat/log
 
