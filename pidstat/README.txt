@@ -34,4 +34,8 @@ PROCEDURE
 - load the database
   - db/load.sh will read the collected pidstat on the master and load it to the database
 
+- run sql scripts
+  - sql/x*.sql: various sql scripts provide examples for analysis
+
+
 
