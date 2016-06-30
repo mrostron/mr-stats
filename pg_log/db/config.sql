@@ -2,15 +2,17 @@
 
 
 -------------------
--- creation of the external tables and persistent copy of pg_log
+-- CONTENTS
+-- scripts to perform creation of the external tables to read and create persistent copy of pg_log
+-- NB this is similar code to gp_toolkit.__log* tables, except that this is programmable to only get some dates
+--    approach is to enable to smaller copy of the pg_log content than would be necessary using gp_toolkit
 -------------------
-
---   :scratch_schema               schema of the external tables and the persi
---   :scratch_owner                owner of the external tables and the persi
---   :segment_extl_pg_log_table    name of the segment external table
---   :master_extl_pg_log_table     name of the master external table
---   :persistent_pg_log_table      name of the final persistent table
---   :log_file                     name of the log file in pg_log
+--  scratch_schema:		schema of the external tables and the persi
+--  scratch_owner:		owner of the external tables and the persi
+--  segment_extl_pg_log_table:	name of the segment external table
+--  master_extl_pg_log_table:	name of the master external table
+--  persistent_pg_log_table:	name of the final persistent table
+--  log_file:			name of the log file in pg_log
 
 \set scratch_owner              mrostron
 \set scratch_schema             ad_hoc
