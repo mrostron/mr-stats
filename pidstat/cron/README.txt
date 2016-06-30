@@ -3,17 +3,17 @@
 CRON INSTALLATION OVERVIEW
 -----------------
 
-- the pidstat cron implementation has two steps:
-  - unzip the distribution into the gpadmin home dir (creates a directory named mr-stats/pidstat/cron)
-  - copy the cron command into /etc/cron.d on all nodes in the cluster
-
-- pull the latest mr-stats zipfile
+- download the latest mr-stats zipfile
 
   - NB:
     -  if you pull the master zipfile from github.com, the file comes down as mr-stats-master.zip
        it will expand to mr-stats-master
        for convenience, you should rename it to mr-stats  i.e. remove the -master suffix
        the rename operation is included below assuming you pulled the master from github
+
+- the pidstat cron installation has two steps:
+  - unzip the distribution into the gpadmin home dir (creates a directory named mr-stats/pidstat/cron)
+  - copy the cron command into /etc/cron.d on all nodes in the cluster
 
 - INSTALLATION: see SETUP notes below: one set for master node, another for segment nodes
 
@@ -25,8 +25,8 @@ OUTPUT
 -----------------
 
 - pidstat will run via cron on each host
-- it will use /home/gpadmin/mr-stats/pidstat as it's home
-- log files are in /home/gpadmin/mr-stats/pidstat/log
+- it will use /data/mr-stats/pidstat as it's home
+- log files are in /data/mr-stats/pidstat/log
   - output of process activity by day-of-week (7-day rotation)
   - pid file of latest process
   - log file containing output from execution each day
@@ -120,6 +120,7 @@ on the master (as root)
 $ su - root
 $ rm -f /etc/cron.d/pidstat_cron
 $ rm -rf /home/gpadmin/mr-stats
+$ rm -rf /data/mr-stats
 
 
 
@@ -130,10 +131,11 @@ on each segment (as root)
 $ su - root
 $ rm -f /etc/cron.d/pidstat_cron
 $ rm -rf /home/gpadmin/mr-stats
+$ rm -rf /data/mr-stats
 
 
 - the shell to do this from the master is (assuming N segment hosts):
-$ for n in {1..N}; do echo sdw${n}; ssh sdw${n} "rm -f /etc/cron.d/pidstat_cron; rm -rf /home/gpadmin/mr-stats"; done
+$ for n in {1..N}; do echo sdw${n}; ssh sdw${n} "rm -f /etc/cron.d/pidstat_cron; rm -rf /home/gpadmin/mr-stats; rm -rf /data/mr-stats"; done
 
 
 

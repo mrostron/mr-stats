@@ -31,7 +31,7 @@
 # set up parameters, customize here
 #-------------
 D=/data/mr-stats/pidstat/log
-TODAY`=$(date +%Y%m%d)
+TODAY=$(date +%Y%m%d)
 T=$(date)
 F=${D}/pidstat.${TODAY}
 L=${D}/pidstat.log
