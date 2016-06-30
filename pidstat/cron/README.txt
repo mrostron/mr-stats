@@ -16,6 +16,8 @@ CRON INSTALLATION OVERVIEW
   - create a directory on each node to hold local pidstat results, owner gpadmin (dflt: /data/mr-stats/pidstat/log)
   - copy the cron command file pidstat_cron into /etc/cron.d on all nodes in the cluster
 
+- TEST RUN: see below
+
 - INSTALLATION: see SETUP notes below: one set for master node, another for segment nodes
 
 - UN-INSTALLATION: see UN-INSTALL notes below
@@ -24,7 +26,6 @@ CRON INSTALLATION OVERVIEW
 -----------------
 OUTPUT
 -----------------
-
 - pidstat will run via cron on each host
 - it will use /data/mr-stats/pidstat as it's home
 - local pidstat output files are in /data/mr-stats/pidstat/log
@@ -34,9 +35,21 @@ OUTPUT
 - local files are copied to the master get-pidstat.sh, then loaded to a database (ref db directory)
 
 
+
+-----------------
+TEST RUN
+-----------------
+
+- the pidstat.sh can be run in isolation to test
+  - edit the I/C variables in the script to say 1 second/10 iterations
+  - as gpadmin, run it
+  - any errors will be issued to stdout
+
+
 -----------------
 CRON INSTALLATION ON MASTER (as root):
 -----------------
+- once the pidstat.sh script has been tested :
 
   - as root:
     - copy the zip file to a temp space on the master host:

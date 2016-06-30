@@ -33,10 +33,12 @@
 D=/data/mr-stats/pidstat/log
 TODAY=$(date +%Y%m%d)
 T=$(date)
-F=${D}/pidstat.${TODAY}
-L=${D}/pidstat.log
-P=${D}/pidstat.pid
-R=3
+F=${D}/pidstat.${TODAY}     # output file path
+L=${D}/pidstat.log          # LOG file path
+P=${D}/pidstat.pid          # PID file path
+R=3                         # retention
+I=10                        # interval
+C=8640                      # count of iterations
 
 #-------------
 # check output directory exists (D)
@@ -78,7 +80,7 @@ fi
 #-------------
 # start pidstat on 10 second poll for 8640 polls (1 day)
 #-------------
-pidstat -C postgres -Iudrhl 10 8640 > ${F} &      # uncomment if you only want postgres processes
+pidstat -C postgres -Iudrhl ${I} ${C} > ${F} &      # uncomment if you only want postgres processes
 # pidstat -p ALL -Iudrhl 10 8640 > ${F} &
 pid=$!
 echo ${pid} > ${P}
