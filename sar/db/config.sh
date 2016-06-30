@@ -8,7 +8,7 @@ export PGHOST=mdw
 
 TEMPDIR=/var/tmp
 CLUSTER=local
-SA_BASE=/data/sa                        # base local storage directory
+SA_BASE=/data/mr-stats/sa               # base local storage directory
 SA_DEST=${SA_BASE}/${CLUSTER}           # cluster-specific local storage directory
 SA_SOURCE=/var/log/sa                   # remote sa directory                           (customize)
 HOSTFILE=${CURRDIR}/hostfile                # list of hosts in cluster                      (as in: for n in $(cat $HOSTFILE))
