@@ -45,7 +45,7 @@
       * the cron will snap all system processes every 10 seconds
       * collect the pidstat cron output on the master/standby
       * load the pidstat data to a repository database (GPDB/HAWQ/PGSQL)
-      * use the charts to determine skew processes
+      * use the charts to determine skew processes and other process related metrics
     * identify queries
       * collect pg_log information and load it to the repo database
       * join the pg_log and pidstat tables to determine the SQL being run by the hot processes
