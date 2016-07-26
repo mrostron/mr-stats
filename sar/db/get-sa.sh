@@ -27,7 +27,8 @@ trap "echo trapped; kill -9 0" 1 2 3 15
 
 function get_list_of_files {
   typeset l_host=${1:?"list_of_files missing param 1 l_host"}
-  ssh ${l_host} "find ${SA_SOURCE} -name sa[0-9][0-9]* -mtime -${DAYS_HIST} | xargs ls -Ggl --time-style='+%Y%m%d' | awk '{print \$4,\$5}'"
+#  ssh ${l_host} "find ${SA_SOURCE} -name sa[0-9][0-9]* -mtime -${DAYS_HIST} | xargs ls -Ggl --time-style='+%Y%m%d' | awk '{print \$4,\$5}'"
+ssh ${l_host} "find ${SA_SOURCE} ! -type l -name sa[0-9][0-9]* -mtime -${DAYS_HIST} | xargs ls -Ggl --time-style='+%Y%m%d' | awk '{print \$4,\$5}'"
 }
 
 
