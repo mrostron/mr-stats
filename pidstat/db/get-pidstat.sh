@@ -60,6 +60,7 @@ do
   get_list_of_files ${l_host} |
   while read TIMESTAMP FULLPATH
   do
+#   note destination file is "PIDSTAT_DEST/host/pidstat{yyyymmdd}"
     typeset f=${l_dest}/pidstat${TIMESTAMP}
     echo "scp -p ${l_host}:${FULLPATH} ${f}"
     scp -p ${l_host}:${FULLPATH} ${f}
